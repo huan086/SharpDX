@@ -179,8 +179,9 @@ namespace SharpGen.Parser
 
                         var arguments = ""; // "--gccxml-gcc-options " + GccXmlGccOptionsFile;
                         // Overrides settings for gccxml for compiling Win8 version
-                        arguments += " --gccxml-config \"" + Path.Combine(Path.GetDirectoryName(ExecutablePath), @"..\share\gccxml-0.9\vc" + vsVersion + @"\gccxml_config") + "\"";
-                        
+                        //arguments += " --gccxml-config \"" + Path.Combine(Path.GetDirectoryName(ExecutablePath), @"..\share\gccxml-0.9\vc" + vsVersion + @"\gccxml_config") + "\"";
+                        arguments += " --gccxml-config \"" + Path.Combine(Path.GetDirectoryName(ExecutablePath), @"..\share\gccxml-0.9\vc12\gccxml_config") + "\"";
+
                         arguments += " -E --gccxml-gcc-options " + GccXmlGccOptionsFile;
                         foreach (var directory in GetIncludePaths())
                             arguments += " " + directory;
@@ -296,7 +297,7 @@ namespace SharpGen.Parser
 
         public static string GetVisualStudioVersion()
         {
-            string vsVersion = ResolveVisualStudioVersion("12");
+            string vsVersion = ResolveVisualStudioVersion("14");
             return vsVersion;
         }
 
@@ -374,7 +375,8 @@ namespace SharpGen.Parser
                     var arguments = ""; // "--gccxml-gcc-options " + GccXmlGccOptionsFile;
 
                     // Overrides settings for gccxml for compiling Win8 version
-                    arguments += " --gccxml-config \"" + Path.Combine(Path.GetDirectoryName(ExecutablePath), @"..\share\gccxml-0.9\vc" + vsVersion + @"\gccxml_config") + "\"";
+                    //arguments += " --gccxml-config \"" + Path.Combine(Path.GetDirectoryName(ExecutablePath), @"..\share\gccxml-0.9\vc" + vsVersion + @"\gccxml_config") + "\"";
+                    arguments += " --gccxml-config \"" + Path.Combine(Path.GetDirectoryName(ExecutablePath), @"..\share\gccxml-0.9\vc12\gccxml_config") + "\"";
 
                     arguments += " -fxml=" + xmlFile;
                     foreach (var directory in GetIncludePaths())
