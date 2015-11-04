@@ -29,6 +29,7 @@
   
   <include file="dwrite.h" attach="true" output="DirectWrite"/>
   <include file="dwrite_1.h" attach="true" output="DirectWrite"/>
+  <include file="dwrite_2.h" attach="true" output="DirectWrite"/>
 
   <naming />
   
@@ -43,6 +44,7 @@
   <mapping>
     <context>dwrite</context>
     <context>dwrite_1</context>
+    <context>dwrite_2</context>
 
     <!--
     // *****************************************************************
@@ -76,6 +78,9 @@
     <map field="DWRITE_LINE_BREAKPOINT::breakConditionBefore" visibility="internal" name="BreakConditionBefore_" />
     <map field="DWRITE_LINE_BREAKPOINT::breakConditionAfter" visibility="internal" name="BreakConditionAfter_" />
     <map struct="DWRITE_TYPOGRAPHIC_FEATURES" visibility="internal"/>
+
+    <map struct="DWRITE_COLOR_GLYPH_RUN" native="true" struct-to-class="true" marshal="true" new="false" />
+    <map field="DWRITE_COLOR_GLYPH_RUN::glyphRunDescription" visibility="internal" name="GlyphRunDescriptionPointer" />
 
     <map struct="DWRITE_PANOSE_INNER_0" name="PanoseText"/>
     <map struct="DWRITE_PANOSE_INNER_1" name="PanoseScript"/>
@@ -202,6 +207,13 @@
 
     <map method="IDWriteBitmapRenderTarget::DrawGlyphRun" visibility="private"/>
     <map param="IDWriteBitmapRenderTarget::DrawGlyphRun::textColor" type="int"/>
+
+    <map interface="IDWriteTextRenderer1" callback="true" callback-dual="false" />
+    <map param="IDWriteColorGlyphRunEnumerator::MoveNext::hasRun" return="true" />
+    <map param="IDWriteFactory2::TranslateColorGlyphRun::colorLayers" return="true" />
+    <map param="IDWriteFactory2::CreateFontFallbackBuilder::fontFallbackBuilder" return="true" />
+    <!-- The generated IDWriteColorGlyphRunEnumerator::GetCurrentRun method has wrong output. We hide this and implement ourself -->
+    <map method="IDWriteColorGlyphRunEnumerator::GetCurrentRun" visibility="internal" property="false" />
 
     <!--
     // *****************************************************************

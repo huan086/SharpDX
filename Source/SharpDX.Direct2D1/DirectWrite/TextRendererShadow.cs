@@ -29,7 +29,7 @@ namespace SharpDX.DirectWrite
     /// </summary>
     internal class TextRendererShadow : PixelSnappingShadow
     {
-        private static readonly TextRendererVtbl Vtbl = new TextRendererVtbl();
+        private static readonly TextRendererVtbl Vtbl = new TextRendererVtbl(0);
 
         /// <summary>
         /// Return a pointer to the unmanaged version of this callback.
@@ -41,9 +41,9 @@ namespace SharpDX.DirectWrite
             return ToCallbackPtr<TextRenderer>(callback);
         }
 
-        private class TextRendererVtbl : PixelSnappingVtbl
+        public class TextRendererVtbl : PixelSnappingVtbl
         {
-            public TextRendererVtbl() : base(4)
+            public TextRendererVtbl(int nbMethods) : base(nbMethods + 4)
             {
                 unsafe
                 {
